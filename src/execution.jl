@@ -160,7 +160,7 @@ macro roc(ex...)
         push!(code.args,
             quote
                 GC.@preserve $(vars...) begin
-                    local $kernel_args = map(rocconvert, ($(var_exprs...),))
+                    local $kernel_args = map(AMDGPU.rocconvert, ($(var_exprs...),))
                     local $kernel_tt = Tuple{map(Core.Typeof, $kernel_args)...}
                     local $kernel = $rocfunction($f, $kernel_tt; $(compiler_kwargs...))
                     local $signal = $create_event($kernel.mod.exe)
