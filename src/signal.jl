@@ -14,6 +14,7 @@ function HSASignal(init::Integer=1)
     end
     return signal
 end
+HSASignal(signal::HSA.Signal) = HSASignal(Ref(signal))
 
 Adapt.adapt_structure(::Adaptor, sig::HSASignal) = sig.signal[]
 
